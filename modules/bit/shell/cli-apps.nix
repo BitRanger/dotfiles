@@ -62,7 +62,6 @@
         home.packages = with pkgs; [
           ripgrep
           fd
-          git
           unzip
           bc # arbitrary-precision calculator
           ncdu # disk usage analyzer

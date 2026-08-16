@@ -4,9 +4,9 @@ _: {
       { pkgs, ... }:
       {
         programs.evolution = {
-	  enable = true;
-	  plugins = [ pkgs.evolution-ews ];
-	};
+          enable = true;
+          plugins = [ pkgs.evolution-ews ];
+        };
       };
   };
 }

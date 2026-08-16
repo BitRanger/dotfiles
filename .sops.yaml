@@ -1,0 +1,7 @@
+keys:
+  - &bitranger age1rkzhchywwzhqmwkjha6xah6kfwwux7g8jqr9dz9vs00twrmvzyhsztx8kp
+creation_rules:
+  - path_regex: ^secrets/users/bitranger.yaml$
+    key_groups:
+      - age:
+          - *bitranger

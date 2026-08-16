@@ -25,8 +25,15 @@
     url = "github:nix-community/home-manager";
   };
   import-tree.url = "github:vic/import-tree";
-  nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+  nix-doom-emacs-unstraightened = {
+    inputs.nixpkgs.follows = "";
+    url = "github:marienz/nix-doom-emacs-unstraightened";
+  };
   nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+  sops-nix = {
+    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:Mic92/sops-nix";
+  };
   spicetify-nix = {
     inputs.nixpkgs.follows = "nixpkgs";
     url = "github:Gerg-L/spicetify-nix";

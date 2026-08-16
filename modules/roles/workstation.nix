@@ -3,6 +3,7 @@
   den.aspects.roles.workstation.includes = [
     bit.desktop.kde
     bit.desktop.sddm
+    bit.desktop.fonts
     bit.hardware.audio
     bit.hardware.bluetooth
     bit.network.network
@@ -15,5 +16,8 @@
     bit.music.spotify
     bit.apps.lunatask
     bit.apps.proton-pass
+    bit.apps.localsend
+    bit.apps.evolution
+        bit.apps.syncthing
   ];
 }

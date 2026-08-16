@@ -5,6 +5,7 @@
       bit.dev.neovim
       bit.dev.doom-emacs
       bit.dev.ghostty
+      bit.dev.git
     ];
   };
 }
