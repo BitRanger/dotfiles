@@ -11,7 +11,7 @@
       luksDeviceName = "crypted";
       bootMountpoint = "/key";
       temporaryPath = "/tmp";
-      usbKeyLabel = "Keys";
+      usbKeyLabel = "Ventoy";
     in
     {
       nixos = { host, ... }: {
@@ -73,8 +73,8 @@
             overrideStrategy = "asDropin";
             text = ''
               [Unit]
-              JobTimeoutSec=3
-              JobRunningTimeoutSec=3
+              JobTimeoutSec=5
+              JobRunningTimeoutSec=5
             '';
           };
 
@@ -82,8 +82,10 @@
             {
               what = "/dev/disk/by-label/${usbKeyLabel}";
               where = bootMountpoint;
+              #type = "ext4";
               type = "exfat";
-	      options = "ro,uid=0,gid=0,fmask=0177,dmask=0077";
+	      options = "ro";
+	      #options = "ro,uid=0,gid=0,fmask=0177,dmask=0077";
 
               unitConfig = {
                 DefaultDependencies = false;
@@ -99,13 +101,15 @@
         # ----------------------------------------------------------------------
         # USB key filesystem
         # ----------------------------------------------------------------------
-
+	# dont need this since using ext4 fs now
         boot.supportedFilesystems = [
           "exfat"
+	    "ext4"
         ];
 
         boot.initrd.kernelModules = [
           "exfat"
+	    "ext4"
         ];
 
         # ----------------------------------------------------------------------

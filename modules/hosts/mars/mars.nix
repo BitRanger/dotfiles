@@ -16,6 +16,7 @@
       { pkgs, ... }:
       {
         #environment.systemPackages = [ pkgs.hello ];
+	networking.hostName = "mars";
       };
 
     # host provides default home environment for its users
