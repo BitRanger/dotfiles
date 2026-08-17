@@ -3,6 +3,13 @@
 {
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
+  nixConfig = {
+    extra-substituters = [ "https://doom-emacs-unstraightened.cachix.org" ];
+    extra-trusted-public-keys = [
+      "doom-emacs-unstraightened.cachix.org-1:O5oOlRPnmQEvVaFyuMTmthCEooHbrg54WgSLR07tmg4="
+    ];
+  };
+
   inputs = {
     den.url = "github:denful/den";
     disko = {

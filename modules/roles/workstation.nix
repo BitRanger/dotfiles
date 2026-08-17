@@ -18,6 +18,6 @@
     bit.apps.proton-pass
     bit.apps.localsend
     bit.apps.evolution
-        bit.apps.syncthing
+    bit.apps.syncthing
   ];
 }

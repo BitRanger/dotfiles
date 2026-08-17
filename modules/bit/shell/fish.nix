@@ -6,7 +6,6 @@
         interactiveShellInit = ''
           set -g fish_greeting
         '';
-
       };
     };
   };

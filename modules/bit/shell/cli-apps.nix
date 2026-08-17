@@ -18,7 +18,7 @@
           };
           fzf = {
             enable = true;
-	    historyWidget.command = ""; # needed because of a bind conflict between atuin and fzf on history Ctrl-r bind
+            historyWidget.command = ""; # needed because of a bind conflict between atuin and fzf on history Ctrl-r bind
             enableFishIntegration = true;
           };
           lsd = {
@@ -54,15 +54,16 @@
             enable = true;
             enableFishIntegration = true;
           };
-	  starship = {
-	    enable = true;
+          starship = {
+            enable = true;
             enableFishIntegration = true;
-	  };
+          };
         };
         home.packages = with pkgs; [
           ripgrep
           fd
           unzip
+          coreutils
           bc # arbitrary-precision calculator
           ncdu # disk usage analyzer
           nix-diff # compare derivations

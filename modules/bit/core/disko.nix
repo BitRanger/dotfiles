@@ -11,7 +11,7 @@
       luksDeviceName = "crypted";
       bootMountpoint = "/key";
       temporaryPath = "/tmp";
-      usbKeyLabel = "Ventoy";
+      usbKeyLabel = "Keys";
     in
     {
       nixos = { host, ... }: {
@@ -73,8 +73,8 @@
             overrideStrategy = "asDropin";
             text = ''
               [Unit]
-              JobTimeoutSec=5
-              JobRunningTimeoutSec=5
+              JobTimeoutSec=${builtins.toString host.hardware.usbKeyTimeout}
+              JobRunningTimeoutSec=${builtins.toString host.hardware.usbKeyTimeout}
             '';
           };
 
@@ -82,10 +82,8 @@
             {
               what = "/dev/disk/by-label/${usbKeyLabel}";
               where = bootMountpoint;
-              #type = "ext4";
-              type = "exfat";
-	      options = "ro";
-	      #options = "ro,uid=0,gid=0,fmask=0177,dmask=0077";
+              type = "ext4";
+              options = "ro";
 
               unitConfig = {
                 DefaultDependencies = false;
@@ -101,15 +99,13 @@
         # ----------------------------------------------------------------------
         # USB key filesystem
         # ----------------------------------------------------------------------
-	# dont need this since using ext4 fs now
+        # dont need this since using ext4 fs now
         boot.supportedFilesystems = [
-          "exfat"
-	    "ext4"
+          "ext4"
         ];
 
         boot.initrd.kernelModules = [
-          "exfat"
-	    "ext4"
+          "ext4"
         ];
 
         # ----------------------------------------------------------------------
@@ -122,7 +118,7 @@
 
         boot.initrd.luks.devices."${luksDeviceName}" = {
           keyFile = "${bootMountpoint}/luks_key.bin";
-          keyFileTimeout = 5; # this timeout is only to check the keyfile, not to mount the drive so it doesn't really matter
+          keyFileTimeout = host.hardware.usbKeyTimeout; # this timeout is only to check the keyfile, not to mount the drive so it doesn't really matter
         };
 
         # ----------------------------------------------------------------------
@@ -172,8 +168,7 @@
 
                       name = "${luksDeviceName}";
 
-                      passwordFile =
-                        "${temporaryPath}/luks_password.txt";
+                      passwordFile = "${temporaryPath}/luks_password.txt";
 
                       settings = {
                         allowDiscards = true;

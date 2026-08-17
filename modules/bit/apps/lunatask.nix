@@ -1,4 +1,4 @@
-_: {
+{
   bit.apps.lunatask = {
     homeManager =
       { pkgs, ... }:

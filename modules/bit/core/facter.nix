@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   bit.core.facter =
     { host, ... }:

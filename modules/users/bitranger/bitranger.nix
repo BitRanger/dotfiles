@@ -7,7 +7,8 @@ let
   sshKeys = {
     personal = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICv2lIFXne+LS1pX3D1oY1y/MXNrjIDyVnewLDMAVrAh crgautam2020@gmail.com";
   };
-in {
+in
+{
   # user aspect
   den.aspects.bitranger = {
     includes = [
@@ -19,9 +20,7 @@ in {
     nixos = _: {
       sops.secrets."users/bitranger/password".neededForUsers = true;
 
-
-
-            # GNOME sets the avatar through accountsservice, which copies the image
+      # GNOME sets the avatar through accountsservice, which copies the image
       # into /var/lib/AccountsService/icons/<user> and records Icon= in
       # users/<user>. Both sit under a path desktop/gnome.nix already persists,
       # but with no Icon= key accountsservice falls back to ~/.face - a bare
@@ -58,7 +57,7 @@ in {
       #};
     };
 
-        # den's 'user' class puts these straight onto users.users.tomwrw. osConfig
+    # den's 'user' class puts these straight onto users.users.tomwrw. osConfig
     # is the parent NixOS config, since this module's own 'config' belongs to
     # the user class.
     user =

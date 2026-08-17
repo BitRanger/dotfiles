@@ -1,4 +1,4 @@
-_: {
+{
   bit.apps.evolution = {
     nixos =
       { pkgs, ... }:

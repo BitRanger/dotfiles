@@ -9,7 +9,7 @@
     bit.core.boot
     bit.core.disko
     bit.core.facter
-        bit.core.sops
+    bit.core.sops
     bit.shell.fish
     bit.shell.cli-apps
     bit.shell.nix-index

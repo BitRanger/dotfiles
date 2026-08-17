@@ -12,26 +12,29 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  bit.core.sops ={user, ...}: {
-    nixos =
-      { config, ... }:
-      {
-        imports = [ inputs.sops-nix.nixosModules.sops ];
-        sops = {
-          defaultSopsFile = ../../../secrets/users/${user.name}.yaml;
-          #defaultSopsFile = ../../../secrets/hosts/${config.networking.hostName}.yaml;
-          age.keyFile = "/home/${user.name}/${ageKeyFile}";
-          age.generateKey = false;
-          # One decryption identity, spelled out. Otherwise sops-nix defaults
-          # sshKeyPaths to the ed25519 host key and turns it into an age
-          # identity at activation, which is a second way in that would change
-          # behaviour if I ever rotated the host key.
-          age.sshKeyPaths = [ ];
-        };
+  bit.core.sops = { user, ... }: {
+    nixos = {
+      imports = [ inputs.sops-nix.nixosModules.sops ];
+      sops = {
+        defaultSopsFile = ../../../secrets/users/${user.name}.yaml;
+        #defaultSopsFile = ../../../secrets/hosts/${config.networking.hostName}.yaml;
+        age.keyFile = "/home/${user.name}/${ageKeyFile}";
+        age.generateKey = false;
+        # One decryption identity, spelled out. Otherwise sops-nix defaults
+        # sshKeyPaths to the ed25519 host key and turns it into an age
+        # identity at activation, which is a second way in that would change
+        # behaviour if I ever rotated the host key.
+        age.sshKeyPaths = [ ];
       };
+    };
 
     homeManager =
-      { config, lib, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         imports = [ inputs.sops-nix.homeManagerModules.sops ];
         sops = {
@@ -56,6 +59,10 @@ in
           # option for this.
           Install.WantedBy = lib.mkForce [ "basic.target" ];
         };
+
+        home.packages = [
+          pkgs.sops
+        ];
       };
   };
 }

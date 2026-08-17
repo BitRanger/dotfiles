@@ -1,9 +1,7 @@
-_: {
+{
   bit.gaming.minecraft = {
-    homeManager =
-      { pkgs, ... }:
-      {
-        programs.prismlauncher.enable = true;
-      };
+    homeManager = {
+      programs.prismlauncher.enable = true;
+    };
   };
 }

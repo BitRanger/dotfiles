@@ -9,6 +9,7 @@
         id = "nvme-eui.0025385751a0a050"; # Check via: lsblk -o NAME,UUID
       };
       ram = "32G";
+      usbKeyTimeout = 5;
     };
     users.bitranger = { };
   };
@@ -27,6 +28,7 @@
         id = "ata-APPLE_SSD_SM0128G_S1W1NYAH310753"; # Check via: lsblk -o NAME,UUID
       };
       ram = "8G";
+      usbKeyTimeout = 5;
     };
     users.bitranger = { };
   };
