@@ -3,7 +3,7 @@
 {
   # bitranger user at saturn host.
   den.hosts.x86_64-linux.saturn = {
-    syncthing.id = "";
+    syncthing.id = "6HKRAL2-KNBLXGU-M4DMRPY-CLTJGR5-WUBWP3A-AWNBRYB-YGWRVJQ-3SKKLQ7";
     hardware = {
       disk = {
         id = "nvme-eui.0025385751a0a050"; # Check via: lsblk -o NAME,UUID
@@ -22,7 +22,7 @@
 
   # other hosts can also have user tux.
   den.hosts.x86_64-linux.mars = {
-    syncthing.id = "";
+    syncthing.id = "FTF6Q56-CZWDNUO-NE7O2D5-HZLAF6O-XD74LLA-HFX7AUV-WS5ZVJ7-P5BM7QX";
     hardware = {
       disk = {
         id = "ata-APPLE_SSD_SM0128G_S1W1NYAH310753"; # Check via: lsblk -o NAME,UUID
