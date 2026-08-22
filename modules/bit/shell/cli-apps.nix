@@ -5,6 +5,8 @@
     homeManager =
       { pkgs, ... }:
       {
+
+	  stylix.targets.zellij.enable = true;
         programs = {
           bat = {
             enable = true;
@@ -62,6 +64,7 @@
         home.packages = with pkgs; [
           ripgrep
           fd
+	  jq
           unzip
           coreutils
           bc # arbitrary-precision calculator

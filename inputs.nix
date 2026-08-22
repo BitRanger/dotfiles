@@ -25,11 +25,20 @@
     url = "github:nix-community/home-manager";
   };
   import-tree.url = "github:vic/import-tree";
+  niri = {
+    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:epireyn/niri-flake";
+  };
   nix-doom-emacs-unstraightened = {
     inputs.nixpkgs.follows = "";
     url = "github:marienz/nix-doom-emacs-unstraightened";
   };
   nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+  noctalia.url = "github:noctalia-dev/noctalia/cachix";
+  noctalia-greeter = {
+    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:noctalia-dev/noctalia-greeter";
+  };
   sops-nix = {
     inputs.nixpkgs.follows = "nixpkgs";
     url = "github:Mic92/sops-nix";
@@ -37,6 +46,10 @@
   spicetify-nix = {
     inputs.nixpkgs.follows = "nixpkgs";
     url = "github:Gerg-L/spicetify-nix";
+  };
+  stylix = {
+    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:nix-community/stylix";
   };
   zen-browser = {
     inputs = {
