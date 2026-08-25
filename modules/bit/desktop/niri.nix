@@ -14,6 +14,7 @@
       #url = "github:noctalia-dev/noctalia";
       #inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
     };
+
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +24,7 @@
     extra-substituters = [
       "https://noctalia.cachix.org"
       #"https://niri.cachix.org"
-      "https://niri-epiryen.cachix.org"
+      "https://niri-epireyn.cachix.org"
     ];
     extra-trusted-public-keys = [
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
@@ -39,9 +40,10 @@
         inputs.noctalia-greeter.nixosModules.default
       ];
       #niri-flake.cache.enable = true;
+      nixpkgs.overlays = [ inputs.niri.overlays.niri ];
       programs.noctalia = {
-        #enable = true;
-        #recommendedServices.enable = true;
+        enable = true;
+        recommendedServices.enable = true;
         ##systemd.enable = true;
         #systemd.target = "niri-session.target";
       };
@@ -71,33 +73,81 @@
     };
     homeManager =
       {
-        config,
         pkgs,
-        host,
+        lib,
         ...
       }:
       {
         imports = [
           inputs.noctalia.homeModules.default
           inputs.niri.homeModules.niri
-          #inputs.niri.homeModules.stylix
-	  inputs.stylix.homeModules.stylix
+          inputs.niri.homeModules.stylix
         ];
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
           settings = {
-            shell.niri_overview_type_to_launch_enabled = true;
-	    shell.launch_apps_as_systemd_services = true;
+            audio.enable_sounds = true;
+            backdrop.enabled = true;
+            bar.default = {
+              border_width = 2.0;
+              concave_edge_corners = false;
+              background_opacity = 0.8;
+              capsule = true;
+              margin_edge = 6;
+              margin_ends = 4;
+              radius = 16;
+              scale = 0.9;
+              start = [
+                "launcher"
+                "workspaces"
+                "sysmon"
+                "ram"
+                "temp"
+                "network_rx"
+                "network_tx"
+              ];
+            };
+            widget.clock.format = "{:%I:%M %p}";
+            widget.launcher.glyph = "prompt";
+            widget.media = {
+              album_art_only = true;
+              hide_when_no_media = true;
+
+            };
+            widget.network.show_label = false;
+            widget.tray.drawer = true;
+            calendar.enabled = true;
+            location.auto_locate = true;
+            weather.unit = "imperial";
+            nightlight = {
+              enabled = true;
+              temperature_night = 4700;
+            };
+            shell = {
+              niri_overview_type_to_launch_enabled = true;
+              launch_apps_as_systemd_services = true;
+              polkit_agent = true;
+              screen_time_enabled = true;
+              greeter_sync.auto_sync = true;
+              screenshot.confirm_region = true;
+              avatar_path = ../../../assets/wallpapers/wallpaper.jpg;
+            };
           };
         };
-	#stylix.targets.noctalia.enable = true;
-	stylix.targets.noctalia.enable = "garbage";
+        stylix.targets.noctalia.enable = true;
+        stylix.targets.niri.enable = true;
         programs.niri = {
           enable = true;
           #package = inputs.niri.packages.${host.system}.niri-unstable;
           package = pkgs.niri;
           settings = {
+            prefer-no-csd = true;
+            xwayland-satellite = {
+              enable = true;
+              path = "${lib.getExe pkgs.xwayland-satellite}";
+            };
+            #xwayland-satellite = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
             input = {
               keyboard = {
                 repeat-rate = 50;
@@ -131,10 +181,12 @@
 
                 # { fixed = 1920; }
               ];
-              focus-ring = {
-                enable = true;
-                width = 4;
-              };
+              # Need to remove this part so stylix can add its own border settings
+              #focus-ring = {
+              #  enable = true;
+              #  width = 4;
+              #};
+              #border.enable = false;
               shadow = {
                 enable = true;
                 softness = 30;
@@ -162,12 +214,23 @@
                   top-right = 20.0;
                 };
                 clip-to-geometry = true;
+                draw-border-with-background = false;
               }
               {
                 matches = [ { app-id = "dev.noctalia.Noctalia"; } ];
                 open-floating = true;
                 default-column-width.fixed = 1080;
                 default-window-height.fixed = 920;
+              }
+              {
+                matches = [ { app-id = "zen-beta|com.mitchellh.ghostty|emacs|discord"; } ];
+                background-effect = {
+                  blur = true;
+                };
+              }
+              {
+                matches = [ { app-id = "discord"; } ];
+                opacity = 0.8;
               }
             ];
             screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
@@ -183,7 +246,7 @@
               "XF86AudioMute".action.spawn-sh = "noctalia msg volume-mute";
               "XF86MonBrightnessUp".action.spawn-sh = "noctalia msg brightness-up";
               "XF86MonBrightnessDown".action.spawn-sh = "noctalia msg brightness-down";
-              "Alt+Tab".action.spawn-sh = "noctalia msg window-switcher";
+              #"Alt+Tab".action.spawn-sh = "noctalia msg window-switcher"; # noctalia's alt tab menu is lwk buns
               "Mod+O" = {
                 repeat = false;
                 action.toggle-overview = [ ];

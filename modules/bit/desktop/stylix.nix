@@ -1,18 +1,26 @@
 { inputs, ... }:
 {
-  flake-file.inputs.stylix = {
-    url = "github:nix-community/stylix";
-    inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs = {
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    papirus-dynamic = {
+      url = "gitlab:paridhips/papirus-dynamic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  bit.desktop.stylix = { pkgs, ... }: {
-    nixos = {
-      #imports = [ inputs.stylix.nixosModules.stylix ];
+  bit.desktop.stylix = {
+    nixos = { pkgs, ... }: {
+      imports = [ inputs.stylix.nixosModules.stylix ];
       stylix = {
-        enable = "trute";
-        autoEnable = false;
-        image = ./wallpaper.jpg;
-        #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+        enable = true;
+        autoEnable = true;
+        image = ../../../assets/wallpapers/default.jpg;
+        #base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+        opacity.terminal = 0.8;
+        opacity.applications = 0.1;
         cursor = {
           name = "Bibata-Modern-Classic";
           package = pkgs.bibata-cursors;
@@ -53,12 +61,18 @@
         ...
       }:
       {
-        #imports = [ inputs.stylix.homeModules.stylix ];
+        imports = [
+          inputs.stylix.homeModules.stylix
+          inputs.papirus-dynamic.homeManagerModules.default
+        ];
         stylix = {
           enable = true;
-          autoEnable = false;
-          image = ./wallpaper.jpg;
-          #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+          autoEnable = true;
+          image = ../../../assets/wallpapers/default.jpg;
+          polarity = "dark";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+          opacity.terminal = 0.8;
+          opacity.applications = 0.8;
           cursor = {
             name = "Bibata-Modern-Classic";
             package = pkgs.bibata-cursors;
@@ -87,6 +101,14 @@
             };
           };
         };
+        programs.noctalia = {
+          settings = {
+            wallpaper.directory = ../../../assets/wallpapers;
+            #wallpaper.default.path = ./wallpaper.jpg;
+            #wallpaper.last.path = ./wallpaper.jpg;
+          };
+        };
+
       };
   };
 }

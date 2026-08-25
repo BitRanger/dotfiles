@@ -5,6 +5,7 @@
     #bit.desktop.sddm
     bit.desktop.fonts
     bit.desktop.niri
+    bit.desktop.umbriel
     bit.desktop.stylix
     bit.hardware.audio
     bit.hardware.bluetooth
@@ -14,6 +15,7 @@
     bit.browsers.zen-browser
     bit.browsers.helium
     bit.messaging.vesktop
+    bit.messaging.nixcord
     bit.messaging.whatsapp
     bit.music.spotify
     bit.apps.lunatask

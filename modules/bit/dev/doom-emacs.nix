@@ -13,7 +13,7 @@
     ];
   };
   bit.dev.doom-emacs = {
-    homeManager = { pkgs, ... }: {
+    homeManager = { config, pkgs, ... }: {
       imports = [
         inputs.nix-doom-emacs-unstraightened.homeModule
       ];
@@ -22,6 +22,21 @@
         emacs = pkgs.emacs-pgtk;
         doomDir = ./doom;
         tangleArgs = "--all config.org";
+        extraPackages =
+          epkgs:
+          let
+            extraPackages = config.programs.emacs.extraPackages epkgs;
+          in
+          extraPackages
+          ++ [
+            (epkgs.trivialBuild {
+              pname = "stylix-theme";
+              # add config from doom's ui/doom module
+              src = pkgs.writeText "stylix-theme.el" config.programs.emacs.extraConfig;
+              version = "0.1.0";
+              packageRequires = extraPackages;
+            })
+          ];
         provideEmacs = true; # set to false to create a specific doom-emacs binary separate from normal emacs
       };
       services.emacs = {
@@ -34,7 +49,7 @@
       };
       home.packages = [
         pkgs.gcc
-	pkgs.ispell
+        pkgs.ispell
       ];
     };
   };

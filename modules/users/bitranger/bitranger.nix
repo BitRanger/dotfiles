@@ -71,6 +71,7 @@ in
         # 1000 and would be right today; it would stop being right the moment a
         # second user were declared ahead of this one.
         uid = 1000;
+        description = "Gautam Cherukuri";
 
         hashedPasswordFile = osConfig.sops.secrets."users/bitranger/password".path;
         openssh.authorizedKeys.keys = lib.attrValues sshKeys;

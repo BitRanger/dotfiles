@@ -9,6 +9,7 @@
       den.aspects.roles.workstation
       den.aspects.roles.dev
       bit.hardware.intel-mac
+      bit.desktop.stylix
       #den.aspects.roles.gaming
     ];
     # host NixOS configuration

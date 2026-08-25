@@ -74,6 +74,7 @@
           nixd # Nix language server
           nixfmt # Nix formatter
           nvd # Nix version diff
+	  wl-clipboard
         ];
       };
   };

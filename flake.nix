@@ -7,7 +7,7 @@
     extra-substituters = [
       "https://doom-emacs-unstraightened.cachix.org"
       "https://noctalia.cachix.org"
-      "https://niri-epiryen.cachix.org"
+      "https://niri-epireyn.cachix.org"
     ];
     extra-trusted-public-keys = [
       "doom-emacs-unstraightened.cachix.org-1:O5oOlRPnmQEvVaFyuMTmthCEooHbrg54WgSLR07tmg4="
@@ -49,10 +49,18 @@
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "";
     };
+    nixcord = {
+      url = "github:4evy/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    papirus-dynamic = {
+      url = "gitlab:paridhips/papirus-dynamic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -65,6 +73,10 @@
     };
     stylix = {
       url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    umbriel = {
+      url = "github:noctalia-dev/umbriel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
