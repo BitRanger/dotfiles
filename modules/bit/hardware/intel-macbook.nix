@@ -22,6 +22,12 @@
           ];
         zramSwap.enable = true;
         hardware.facetimehd.enable = true;
+	  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver  # For Broadwell (2014) and newer CPUs (iHD driver)
+    ];
       };
   };
+};
 }

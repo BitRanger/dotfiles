@@ -13,9 +13,13 @@
     { host, ... }:
     {
       homeManager =
-        { pkgs, ... }:
+        { lib, ... }:
         {
           imports = [ inputs.zen-browser.homeModules.beta ];
+          stylix.targets.zen-browser.enable = true;
+          stylix.targets.zen-browser.profileNames = [ "default" ];
+          stylix.targets.zen-browser.enableCss = true;
+          stylix.targets.zen-browser.opacityHex = lib.mkForce "1A";
           programs.zen-browser = {
             enable = true;
             setAsDefaultBrowser = true;
@@ -25,6 +29,59 @@
             profiles.default.presets.betterfox.enable = true;
             # arkenfox for Zen (arkenfox/user.js)
             profiles.default.presets.arkenfox.enable = true;
+            profiles.default.containers = {
+              personal = {
+                id = 1;
+                name = "Personal";
+                color = "blue";
+                icon = "fingerprint";
+              };
+              college = {
+                id = 2;
+                name = "College";
+                color = "red";
+                icon = "fruit";
+              };
+              dev = {
+                id = 3;
+                name = "Dev";
+                color = "purple";
+                icon = "briefcase";
+              };
+              chill = {
+                id = 4;
+                name = "Chill";
+                color = "yellow";
+                icon = "chill";
+              };
+            };
+            profiles.default.spacesForce = true; # Delete spaces not declared here
+            profiles.default.spaces = {
+              "Personal" = {
+                id = "c9dd1ce0-2750-4c16-a398-43cd615291ac";
+                container = 1;
+                position = 0;
+                icon = "🏠";
+              };
+              "College" = {
+                id = "9641fa73-b023-4c6f-a116-8fd835278c8c";
+                container = 2;
+                position = 1;
+                icon = "📚";
+              };
+              "Dev" = {
+                id = "020c3c06-810f-4ac5-9274-79fd60804843";
+                container = 3;
+                position = 2;
+                icon = "💾";
+              };
+              "Chill" = {
+                id = "43da2845-f2a9-4354-b533-4926ec55c1c8";
+                container = 4;
+                position = 3;
+                icon = "🫠";
+              };
+            };
             policies = {
               AutofillAddressEnabled = true;
               AutofillCreditCardEnabled = false;
@@ -51,6 +108,8 @@
               "zen.view.compact.hide-tabbar" = true;
               "zen.urlbar.behavior" = "float";
               "zen.welcome-screen.seen" = true;
+              "zen.theme.gradient.show-custom-colors" = true;
+              "zen.theme.acrylic-elements" = true;
             };
             # Three-layer configuration overview:
             #
