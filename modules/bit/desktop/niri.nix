@@ -171,6 +171,7 @@
               "session"
               "lock-and-suspend"
             ];
+	    outputs.eDP-1.scale = 2.0;
             layout = {
               gaps = 16;
               center-focused-column = "never";

@@ -39,8 +39,8 @@
     syncthing.id = "";
     hardware = {
       disk = {
-        id = "ata-APPLE_SSD_SM0128G_S1W1NYAH310753"; # Check via: lsblk -o NAME,UUID
-	main-partition-size = "71.5%"; # leaves approximately 700gb for actual storage and 32gb for hibernation
+        id = "nvme-eui.0000000000000000707c181d26007cbe"; # Check via: lsblk -o NAME,UUID
+	main-partition-size = "733G"; # leaves approximately 700gb for actual storage and 32gb for hibernation
       };
       ram = "32G";
       usbKeyTimeout = 5;
