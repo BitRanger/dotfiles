@@ -12,12 +12,14 @@
         # flatten den.hosts.<system>.<hostname> -> <hostname> across all systems
         allHosts = lib.concatMapAttrs (_system: hosts: hosts) den.hosts;
         currentHost = host.name;
-        syncthingHosts = lib.mapAttrs (_: host: { id = host.syncthing.id; }) (
-          lib.filterAttrs (
+        nixHosts = lib.mapAttrs (_: host: { id = host.syncthing.id; }) (
             name: host: name != currentHost && host ? syncthing && host.syncthing ? id
-          ) allHosts
-        );
-
+          ) allHosts;
+        syncthingHosts = nixHosts // {
+          pixel = {
+            id = "7NNBLBE-MHC3Q7J-FA7C3SJ-4KY2ZMC-YRTD6S7-ONHDXE5-2ZZ6U7R-ZKY3FQW";
+          };
+        };
       in
       {
         sops.secrets = {
@@ -43,7 +45,7 @@
           overrideDevices = true;
           overrideFolders = true;
           settings = {
-            devices = syncthingHosts;
+            #devices = syncthingHosts;
             options = {
               #relaysEnabled = false;
               #globalAnnounceEnabled = false;
@@ -54,7 +56,7 @@
 
             folders.Syncthing = {
               path = "${config.home.homeDirectory}/Syncthing";
-              #devices = builtins.attrNames allDevices;
+              #devices = builtins.attrNames syncthingHosts;
               versioning = {
                 type = "staggered";
                 params = {

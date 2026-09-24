@@ -239,6 +239,7 @@
               "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
               "Mod+T".action.spawn = "ghostty";
               "Mod+Space".action.spawn-sh = "noctalia msg panel-toggle launcher";
+              "Mod+D".action.spawn-sh = "noctalia msg panel-toggle launcher";
               "Mod+S".action.spawn-sh = "noctalia msg panel-toggle control-center";
               "Mod+Semicolon".action.spawn-sh = "noctalia msg settings-toggle";
               "XF86AudioRaiseVolume".action.spawn-sh = "noctalia msg volume-up";

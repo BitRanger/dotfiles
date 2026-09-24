@@ -83,6 +83,9 @@ in
           "render"
           "audio"
           "input"
+	  "eduroam"
+	  "dialout"
+	  "tty"
         ];
       };
 

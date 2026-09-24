@@ -29,6 +29,7 @@
             profiles.default.presets.betterfox.enable = true;
             # arkenfox for Zen (arkenfox/user.js)
             profiles.default.presets.arkenfox.enable = true;
+	    profiles.default.containersForce = true;
             profiles.default.containers = {
               personal = {
                 id = 1;
@@ -93,6 +94,7 @@
               DontCheckDefaultBrowser = true;
               NoDefaultBookmarks = true;
               OfferToSaveLogins = false;
+	      SanitizeOnShutdown = false;
               EnableTrackingProtection = {
                 Value = true;
                 Locked = true;
