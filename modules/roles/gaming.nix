@@ -5,7 +5,7 @@
       bit.gaming.minecraft
       bit.gaming.steam
       bit.gaming.sunshine
-      bit.gaming.moza
+      #bit.gaming.moza
     ];
   };
 }

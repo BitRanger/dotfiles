@@ -7,6 +7,7 @@
     hardware = {
       disk = {
         id = "nvme-eui.0025385751a0a050"; # Check via: lsblk -o NAME,UUID
+	main-partition-size = "100%";
       };
       ram = "32G";
       usbKeyTimeout = 5;
@@ -26,8 +27,22 @@
     hardware = {
       disk = {
         id = "ata-APPLE_SSD_SM0128G_S1W1NYAH310753"; # Check via: lsblk -o NAME,UUID
+	main-partition-size = "100%";
       };
       ram = "8G";
+      usbKeyTimeout = 5;
+    };
+    users.bitranger = { };
+  };
+
+  den.hosts.x86_64-linux.terra = {
+    syncthing.id = "";
+    hardware = {
+      disk = {
+        id = "ata-APPLE_SSD_SM0128G_S1W1NYAH310753"; # Check via: lsblk -o NAME,UUID
+	main-partition-size = "71.5%"; # leaves approximately 700gb for actual storage and 32gb for hibernation
+      };
+      ram = "32G";
       usbKeyTimeout = 5;
     };
     users.bitranger = { };

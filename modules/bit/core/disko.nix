@@ -161,7 +161,7 @@
                   # ----------------------------------------------------------------
 
                   luks = {
-                    size = "100%";
+                    size = host.hardware.disk.main-partition-size;
 
                     content = {
                       type = "luks";
